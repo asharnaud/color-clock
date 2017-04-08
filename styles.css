@@ -18,3 +18,11 @@ p {
   font-family: 'Press Start 2P', cursive;
   font-size: 25px;
 }
+
+#progress-bar {
+  border: 1px solid gray;
+  color: gray;
+  margin-top: 10px;
+  width: 5%;
+  height: 3%;
+}
