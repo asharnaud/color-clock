@@ -19,7 +19,7 @@ p {
   font-size: 25px;
 }
 
-#progress-bar {
+#progressBar {
   border: 1px solid gray;
   color: gray;
   margin-top: 10px;
