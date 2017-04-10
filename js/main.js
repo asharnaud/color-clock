@@ -20,7 +20,7 @@ function setCurrentTime () {
   $('#time').html(getTimeOrHex('time'))
 }
 
-currentTime()
+setCurrentTime()
 
 var ONE_SECOND = 1 * 1000
 
