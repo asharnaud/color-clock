@@ -5,7 +5,8 @@ function getTimeOrHex (input) {
   var time = new Date().toLocaleTimeString()
   var seconds = theDate.getSeconds()
   var hexSeconds = seconds.toString(16)
-  var hex = '#' + hexSeconds + (Math.round((Math.random() * 50) + 1)) + (Math.round((Math.random() * 40) + 1))
+  var hexnums = (Math.round((Math.random() * 50) + 1)) + (Math.round((Math.random() * 40) + 1))
+  var hex = '#' + hexSeconds + hexnums
   if (input === 'time') {
     return time
   } else if (input === 'seconds') {
@@ -15,38 +16,36 @@ function getTimeOrHex (input) {
   }
 }
 
-function currentTime () {
+function setCurrentTime () {
   $('#time').html(getTimeOrHex('time'))
 }
 
 currentTime()
 
-var everySecond = 1 * 1000
+var ONE_SECOND = 1 * 1000
 
-var clock = setInterval(intervals, everySecond)
+var clock = setInterval(runProgressBarAndTime, ONE_SECOND)
 
 function changeBackgroundToHex () {
   $('body').css('background', getTimeOrHex('hex'))
 }
 changeBackgroundToHex()
 
-var changeColor = setInterval(changeBackgroundToHex, everySecond * 2)
+var changeColor = setInterval(changeBackgroundToHex, ONE_SECOND * 2)
 
-function secondsToPercent () {
+function getCurrentPercent () {
   var sec = getTimeOrHex('seconds')
-  console.log(sec)
   var percent = ((sec * 100) / 60) + '%'
-  console.log(percent)
   return percent
 }
 
 function fillProgressBar () {
-  $('#progress-bar').css({ width: secondsToPercent() })
+  $('#progressBar').css({ width: getCurrentPercent() })
 }
 
-function intervals () {
+function runProgressBarAndTime () {
   fillProgressBar()
-  currentTime()
+  setCurrentTime()
 }
 
 function whenHovered () {
@@ -56,9 +55,9 @@ function whenHovered () {
 }
 
 function whenNotHovered () {
-  $('#time').html(currentTime())
-  clock = setInterval(intervals, everySecond)
-  changeColor = setInterval(changeBackgroundToHex, everySecond * 2)
+  $('#time').html(setCurrentTime())
+  clock = setInterval(runProgressBarAndTime, ONE_SECOND)
+  changeColor = setInterval(changeBackgroundToHex, ONE_SECOND * 2)
 }
 
 $('#time').hover(whenHovered, whenNotHovered)
